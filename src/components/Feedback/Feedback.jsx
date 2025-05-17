@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Feedback.module.css";
 
 
-function Feedback({good, neutral, bad}) {
+function Feedback({good, neutral, bad, positivePercentage}) {
     const total = good + neutral + bad;
-    const positivePercentage = total === 0 ? 0 : Math.round((good / total) * 100);
+    
 
     return (
      <div className={styles.feedback}>
@@ -18,6 +18,7 @@ function Feedback({good, neutral, bad}) {
         </ul>
      </div>
     )
+
 }
 
 export default Feedback;

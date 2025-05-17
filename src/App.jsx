@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Feedback from "./components/Feedback/Feedback.jsx";
 import Options from "./components/Options/Options.jsx";
 import Notification from "./components/Notification/Notification.jsx";
+import Description from "./components/Description/Description.jsx";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
   };
 
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positivePercentage = totalFeedback === 0 ? 0 : Math.round((feedback.good / totalFeedback) * 100);
 
   useEffect(() => {
     localStorage.setItem("feedback", JSON.stringify(feedback));
@@ -40,19 +42,24 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Sip Happens Café</h1>
-      <p>Please leave your feedback about our service by selecting one of the options below.</p>
+      <Description />
       
-      
-      <Options onLeaveFeedback={handleFeedback} 
+      <Options 
+      onLeaveFeedback={handleFeedback} 
       onReset={handleReset}
       totalFeedback={totalFeedback}/>
-{(feedback.good + feedback.neutral + feedback.bad) === 0 ? (<Notification message={"No feedback yet"} />) : (
-<Feedback 
-      good={feedback.good}
-      neutral={feedback.neutral}
-      bad={feedback.bad}/>
-)}
+
+      {totalFeedback === 0 ? (
+        <Notification message={"No feedback yet"} />
+      ) : (
+        <Feedback
+          good={feedback.good}
+          neutral={feedback.neutral}
+          bad={feedback.bad}
+          positivePercentage={positivePercentage}
+        />
+      )}
+
 
       
     </div>
