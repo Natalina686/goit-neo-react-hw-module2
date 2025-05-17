@@ -14,7 +14,7 @@ function Feedback({good, neutral, bad, positivePercentage}) {
             <li>Neutral: {neutral}</li>
             <li>Bad: {bad}</li>
             <li>Total: {total}</li>
-            <li>Positive: {positivePercentage}</li>
+            <li>Positive: {positivePercentage}%</li>
         </ul>
      </div>
     )
